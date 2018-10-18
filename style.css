@@ -1,0 +1,16 @@
+body{
+    margin: 0;
+}
+main{
+    text-align: center;
+}
+#main{
+    display: inline-block;
+}
+#main kbd{
+    display: inline-block;
+    width: 4em;
+    height: 4em;
+    border: 1px solid #ccc;
+    transform: uppercase;
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>导航页面</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header></header>
+    <main>
+        <div id="main"></div>
+    </main>
+    <footer></footer>
+    <!-- 
+        qwertyuiop
+        asdfghjkl
+        zxcvbnm
+     -->
+    <script>
+        var keys = {
+            '0' : {0:'q',1:'w',2:'e',3:'r',4:'t',5:'y',6:'u',7:'i',8:'o',9:'p',length:10},
+            '1' : {0:'a',1:'s',2:'d',3:'f',4:'g',5:'h',6:'j',7:'k',8:'l',length:9},
+            '2' : {0:'z',1:'x',2:'c',3:'v',4:'b',5:'n',6:'m',length:7},
+            'length': 3
+        }
+        var hashs = {
+            'q': 'qq.com',
+            'w': 'weibo.com',
+            'e': 'ele.me', 
+            'r': 'renren.com', 
+            't': 'tianya.com', 
+            'y': 'youtube.com', 
+            'u': 'uc.com' , 
+            'i': 'iqiyi.com', 
+            'o': 'opera.com', 
+            'p': undefined, 
+            'a': 'acfun.tv', 
+            's': 'sohu.com', 
+            'z': 'zhihu.com', 
+            'm': 'www.mcdonalds.com.cn'
+        }
+        
+        index = 0
+        while(index<keys['length']){
+            div = document.createElement('div')
+            index2 = 0
+            var row = keys[index];  // 第一个数组 第二个数组 第三个数组
+            while(index2<row['length']){
+                // console.log(keys[index2]['length'])
+                //keys[index2]['length']为什么这个会不行的
+                kbd = document.createElement('kbd');
+                div.appendChild(kbd)
+                index2 = index2 + 1
+            }
+            main.appendChild(div)
+            index = index + 1
+        }
+    </script>
+</body>
+
+</html>

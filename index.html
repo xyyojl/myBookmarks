@@ -11,7 +11,9 @@
 
 <body>
     <header></header>
-    <main id="main"></main>
+    <main>
+        <div id="main"></div>
+    </main>
     <footer></footer>
     <!-- 
         qwertyuiop
@@ -20,10 +22,10 @@
      -->
     <script>
         keys = {
-            0 : {0 :'q',1:'w',2:'e',3:'r',4:'t',5:'y',6:'u',7:'i',8:'o',9:'p',length:10},
-            1 : {0:'a',1:'s',2:'d',3:'f',4:'g',5:'h',6:'j',7:'k',8:'l',length:9},
-            2 : {0:'z',1:'x',2:'c',3:'v',4:'b',5:'n',6:'m',length:7},
-            length : 3
+            '0' : {0 :'q',1:'w',2:'e',3:'r',4:'t',5:'y',6:'u',7:'i',8:'o',9:'p',length:10},
+            '1' : {0:'a',1:'s',2:'d',3:'f',4:'g',5:'h',6:'j',7:'k',8:'l',length:9},
+            '2' : {0:'z',1:'x',2:'c',3:'v',4:'b',5:'n',6:'m',length:7},
+            'length' : 3
         }
         hash = {
             'q' : 'qq.com',
@@ -35,18 +37,57 @@
             'u' : 'uc.com',
             'i' : 'iqiyi.com',
             'o' : 'opera.com',
-            'p' : 'python.com',
-            'a' : 'python.org',
+            'p' : 'python.org',
+            'a' : 'acfun.cn',
             'd' : 'dilidili.wang',
             'z' : 'zhihu.com',
             'x' : 'xiaohuochai.cc',
             'c' : 'csdn.net',
             'm' : 'meizu.com'
         }
+        //取出localStorage中的zzz对应的hash
+        hashInLocalStorage = JSON.parse(localStorage.getItem('zzz')|| null);
+        if(hashInLocalStorage){
+            hash = hashInLocalStorage;
+        }
+        // 记得使用循环，要注意叠加，不要像傻子弄一个死循环，卡死电脑
+        //创建3个div，每一个div里面有对应数量的kbd
         index = 0
-        while(index < keys['length']){
+        while(index < keys['length']){//0 1 2
             div1 = document.createElement('div');
             main.appendChild(div1);
+            row = keys[index];   //第一个数组 第二个数组 第三个数组 重点
+            index2 = 0;
+            while(index2 < row['length']){//将固定的10换成可控制的
+                kbd1 = document.createElement('kbd');
+                kbd1.textContent = row[index2];
+                button = document.createElement('button');
+                button.textContent = '编辑';
+                button.id = row[index2];
+                button.onclick = function(xyz){
+                    //获取到当前的id
+                    key = xyz['target']['id'];
+                    //用户输入网址
+                    x = prompt('请输入一个网址');
+                    //将原来的网址修改成用户输入的网址
+                    hash[key] = x;
+                    localStorage.setItem('zzz',JSON.stringify(hash)) 
+                    console.log(hash);
+                }
+                kbd1.appendChild(button);
+                div1.appendChild(kbd1);
+                index2 = index2 + 1;
+            }
+            index = index + 1;
+        }
+        //要监听谁的键盘事件 main还是document，需要知道用户按得是什么键
+        //key的兼容性不是很好
+        document.onkeypress = function(xyz){
+            key = xyz['key'];
+            website = hash[key];
+            // console.log(website);
+            // location.href = 'http://' + website;
+            window.open('http://'+website,'_blank');
         }
     </script>
 </body>

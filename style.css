@@ -1,5 +1,17 @@
-body{
-    margin: 0;
+*{margin: 0; padding: 0;}
+a{text-decoration: none;}
+kbd{
+    position: relative;
+    border: 1px solid red;
+    width: 4em;
+    height: 4em;
+    display: inline-block;
+    text-transform: uppercase;
+}
+kbd > button{
+    position: absolute;
+    right: 0;
+    bottom: 0;
 }
 main{
     text-align: center;
@@ -7,10 +19,9 @@ main{
 #main{
     display: inline-block;
 }
-#main kbd{
-    display: inline-block;
-    width: 4em;
-    height: 4em;
-    border: 1px solid #ccc;
-    transform: uppercase;
+#main div:nth-child(2){
+    margin-left: 2em;
+}
+#main div:nth-child(3){
+    margin-left: 4em;
 }

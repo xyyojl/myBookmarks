@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>我的导航页面</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
@@ -21,60 +21,70 @@
         zxcvbnm
      -->
     <script>
+        /*
+        思路：
+            1. 分析页面，使用什么数据结构
+            2. 使用JS自动生成标签，不用手动写，生成三个div，每个div里面有对应的个数的kbd
+            3. 可以假设kbd是一样，然后将固定的个数修改对应的多少个
+            4. 使用css美化界面
+
+        */
         keys = {
-            '0' : {0 :'q',1:'w',2:'e',3:'r',4:'t',5:'y',6:'u',7:'i',8:'o',9:'p',length:10},
+            '0' : {0:'q',1:'w',2:'e',3:'r',4:'t',5:'y',6:'u',7:'i',8:'o',9:'p',length:10},
             '1' : {0:'a',1:'s',2:'d',3:'f',4:'g',5:'h',6:'j',7:'k',8:'l',length:9},
             '2' : {0:'z',1:'x',2:'c',3:'v',4:'b',5:'n',6:'m',length:7},
             'length' : 3
         }
         hash = {
-            'q' : 'qq.com',
-            'w' : 'weibo.com',
-            'e' : 'email.163.com',
-            'r' : 'renren.com',
-            't' : 'tianya.com',
-            'y' : 'youtube.com',
-            'u' : 'uc.com',
-            'i' : 'iqiyi.com',
-            'o' : 'opera.com',
-            'p' : 'python.org',
-            'a' : 'acfun.cn',
-            'd' : 'dilidili.wang',
-            'z' : 'zhihu.com',
-            'x' : 'xiaohuochai.cc',
-            'c' : 'csdn.net',
-            'm' : 'meizu.com'
+            q : 'qq.com',
+            w : 'weibo.com',
+            e : 'ele.me',
+            t : 'tianya.cn',
+            y : 'youtube.com',
+            u : 'uc.com',
+            i : 'iqiyi.com',
+            o : 'opera.com',
+            p : 'python.org',
+            a : 'acfun.cn',
+            s :  undefined,
+            d : 'dilidili.wang',
+            z : 'zhihu.com',
+            x : 'xiaohuochai.cc',
+            c : 'csdn.net',
+            m : 'meizu.com'
         }
         //取出localStorage中的zzz对应的hash
-        hashInLocalStorage = JSON.parse(localStorage.getItem('zzz')|| null);
+        hashInLocalStorage = JSON.parse(localStorage.getItem('zzz') || null);
         if(hashInLocalStorage){
             hash = hashInLocalStorage;
         }
-        // 记得使用循环，要注意叠加，不要像傻子弄一个死循环，卡死电脑
-        //创建3个div，每一个div里面有对应数量的kbd
+        //记得使用循环时，要注意叠加，不要像个傻子那样弄一个死循环出来，卡死电脑
+        // div1 kbd1相当于是容器/盒子
         index = 0
         while(index < keys['length']){//0 1 2
             div1 = document.createElement('div');
             main.appendChild(div1);
-            row = keys[index];   //第一个数组 第二个数组 第三个数组 重点
-            index2 = 0;
+            row = keys[index];
+            // console.log(keys[index]['length']);
+            index2 = 0
             while(index2 < row['length']){//将固定的10换成可控制的
                 kbd1 = document.createElement('kbd');
-                kbd1.textContent = row[index2];
-                button = document.createElement('button');
-                button.textContent = '编辑';
-                button.id = row[index2];
-                button.onclick = function(xyz){
-                    //获取到当前的id
+                // kbd1.textContent = 'hi';
+                kbd1.textContent = row[index2];//第一个数组 第二个数组 第三个数组
+                button1 = document.createElement('button');
+                button1.textContent = '编辑';
+                button1.id = row[index2];
+                button1.onclick = function(xyz){
+                    // console.log(xyz.target);
+                    //获取当前的id
                     key = xyz['target']['id'];
-                    //用户输入网址
-                    x = prompt('请输入一个网址');
-                    //将原来的网址修改成用户输入的网址
-                    hash[key] = x;
-                    localStorage.setItem('zzz',JSON.stringify(hash)) 
-                    console.log(hash);
+                    //用户输入一个网址
+                    web = prompt('请输入一个网址：');
+                    //将原来的hash给替换掉
+                    hash[key] = web;
+                    localStorage.setItem('zzz',JSON.stringify(hash));
                 }
-                kbd1.appendChild(button);
+                kbd1.appendChild(button1);
                 div1.appendChild(kbd1);
                 index2 = index2 + 1;
             }
@@ -85,8 +95,6 @@
         document.onkeypress = function(xyz){
             key = xyz['key'];
             website = hash[key];
-            // console.log(website);
-            // location.href = 'http://' + website;
             window.open('http://'+website,'_blank');
         }
     </script>

@@ -1,27 +1,25 @@
-*{margin: 0; padding: 0;}
-a{text-decoration: none;}
-kbd{
-    position: relative;
-    border: 1px solid red;
-    width: 4em;
-    height: 4em;
-    display: inline-block;
-    text-transform: uppercase;
-}
-kbd > button{
-    position: absolute;
-    right: 0;
-    bottom: 0;
-}
+*{margin: 0;padding:0;}
 main{
     text-align: center;
 }
 #main{
     display: inline-block;
 }
-#main div:nth-child(2){
-    margin-left: 2em;
+#main kbd{
+    position: relative;
+    width: 4em;
+    height: 4em;
+    border: 1px solid red;
+    display: inline-block;
+    text-transform: uppercase;
 }
-#main div:nth-child(3){
-    margin-left: 4em;
+#main kbd > button{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size: 12px;
+    display: none;
+}
+#main kbd:hover > button{
+    display: inline-block;
 }

@@ -59,22 +59,34 @@
             hash = hashInLocalStorage;
         }
         //记得使用循环时，要注意叠加，不要像个傻子那样弄一个死循环出来，卡死电脑
-        // div1 kbd1相当于是容器/盒子
+        // div kbd相当于是容器/盒子
         index = 0
         while(index < keys['length']){//0 1 2
-            div1 = document.createElement('div');
-            main.appendChild(div1);
+            div = document.createElement('div');
+            div.className = 'row';
+            main.appendChild(div);
             row = keys[index];
             // console.log(keys[index]['length']);
             index2 = 0
             while(index2 < row['length']){//将固定的10换成可控制的
-                kbd1 = document.createElement('kbd');
-                // kbd1.textContent = 'hi';
-                kbd1.textContent = row[index2];//第一个数组 第二个数组 第三个数组
-                button1 = document.createElement('button');
-                button1.textContent = '编辑';
-                button1.id = row[index2];
-                button1.onclick = function(xyz){
+                kbd = document.createElement('kbd');
+                span = document.createElement('span');
+                // kbd.textContent = 'hi';
+                span.textContent = row[index2];//第一个数组 第二个数组 第三个数组
+                span.className = 'text';
+                kbd.appendChild(span);
+                kbd.className = 'key';
+                img = document.createElement('img');
+                if(hash[row[index2]]){
+                    img.src = 'http://' + hash[row[index2]] + '/favicon.ico';
+                }else{
+                    img.src = '//i.loli.net/2017/11/10/5a05afbc5e183.png';
+                }
+                
+                button = document.createElement('button');
+                button.textContent = '编辑';
+                button.id = row[index2];
+                button.onclick = function(xyz){
                     // console.log(xyz.target);
                     //获取当前的id
                     key = xyz['target']['id'];
@@ -84,13 +96,14 @@
                     hash[key] = web;
                     localStorage.setItem('zzz',JSON.stringify(hash));
                 }
-                kbd1.appendChild(button1);
-                div1.appendChild(kbd1);
+                kbd.appendChild(img);
+                kbd.appendChild(button);
+                div.appendChild(kbd);
                 index2 = index2 + 1;
             }
             index = index + 1;
         }
-        //要监听谁的键盘事件 main还是document，需要知道用户按得是什么键
+        //要监听谁的键盘事件 main还是document，需要知道用户按的是什么键
         //key的兼容性不是很好
         document.onkeypress = function(xyz){
             key = xyz['key'];

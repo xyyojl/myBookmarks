@@ -82,18 +82,24 @@
                 }else{
                     img.src = '//i.loli.net/2017/11/10/5a05afbc5e183.png';
                 }
-                
+                img.onerror = function(xyz){
+                    xyz.target.src = '//i.loli.net/2017/11/10/5a05afbc5e183.png';
+                }
                 button = document.createElement('button');
                 button.textContent = '编辑';
                 button.id = row[index2];
                 button.onclick = function(xyz){
-                    // console.log(xyz.target);
+                    button2 = xyz['target'];
+                    img2 = button2.previousSibling;
+                    console.log(img2)
                     //获取当前的id
-                    key = xyz['target']['id'];
+                    key = button2['id'];
                     //用户输入一个网址
                     web = prompt('请输入一个网址：');
                     //将原来的hash给替换掉
                     hash[key] = web;
+                    img2.src = 'http://' + web + '/favicon.ico';
+                    xyz.target.src = '//i.loli.net/2017/11/10/5a05afbc5e183.png';
                     localStorage.setItem('zzz',JSON.stringify(hash));
                 }
                 kbd.appendChild(img);

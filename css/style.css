@@ -1,10 +1,175 @@
 *{margin: 0;padding:0;}
+ul{list-style: none;}
+.clearfix::after{
+    content: '';
+    display: block;
+    clear: both;
+}
 body{
     /* viewport height */
-    height: 100vh;
-    background: #ccc url(./wall.jpg) no-repeat center center;
+    /* height: 100vh; */
+    background: #ccc url(../image/bg.jpg) no-repeat center center;
+    background-size: cover;
 }
-main{
+header{
+    width: 720px;
+    height: 44px;
+    margin: 100px auto 50px;
+}
+header .search-engin-pic{
+    float: left;
+    width: 120px;
+    height: 44px;
+}
+header .search-engin-pic li{
+    display: none;
+}
+header .search-engin-pic li.active{
+    display: inline-block;
+}
+header .search-engin-pic li:nth-child(2) img{
+    width: 120px;
+    height: 44px;
+}
+header .search-engin-pic li:nth-child(1) img{
+    width: 120px;
+    padding: 2.5px 0;
+}
+header .search-bar{
+    float: right;
+    width: 580px;
+    height: 44px;
+    border-radius: 24px;
+    position: relative;
+    background: #fff;
+}
+header .search-bar:hover{
+    box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
+    border-color: rgba(223,225,229,0);
+}
+header .search-bar .search-engin-logo{
+    position: absolute;
+    left: 10px;
+    width: 24px;
+    height: 44px;
+}
+header .search-bar .search-engin-logo li{
+    display: none;
+}
+header .search-bar .search-engin-logo li.active{
+    display: inline-block;
+}
+.search-bar .search-engin-logo li img{
+    width: 24px;
+    height: 24px;
+    padding: 10px 0;
+}
+.search-bar input{
+    position: absolute;
+    left: 46px;
+    top: 10%;
+    width: 505px;
+    height: 80%;
+    border: none;
+    outline: none;
+}
+.search-bar .search-btn{
+    position: absolute;
+    right: 6px;
+    top: 7px;
+    width: 30px;
+    height: 30px;
+    background: url(../image/search-btn.png) center center no-repeat;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+.wrapper div{
+    width: 850px;
+    margin: 0 auto;
+    text-align: center;
+}
+.wrapper .kbd_wrapper{
+    display: inline-block;
+    vertical-align: top;
+    width: 65px;
+    height: 55px;
+    border-radius: 7px;
+    margin: 6px;
+    box-shadow: 0 4px 3px 0 #3C3C3D, 0 0 1px 0 #3C3C3D;
+    text-align: center;
+}
+.wrapper kbd{
+    position: relative;
+    display: inline-block;
+    width: 65px;
+    height: 50px;
+    background: linear-gradient(to bottom, #fff 0%,#fff 70%,#f3f3f3 100%);
+    border-radius: 7px;
+    box-shadow: 0 5px 0 0 #767d81;
+    color: #767D81;
+    font-family: Helvetical;
+    vertical-align: top;
+    line-height: 50px;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: all .2s linear;
+}
+.wrapper .kbd_wrapper:hover {
+    cursor: pointer;
+    animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+.wrapper kbd > button{
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+    font-size: 12px;
+    display: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    color: #333;
+}
+.wrapper kbd:hover > button{
+    display: inline-block;
+}
+.key img{
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    left: 4px;
+    bottom: 2px;
+}
+@keyframes shake {
+    10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+    20%, 80% {
+        transform: translate3d(2px, 0, 0);
+    }
+    30%, 50%, 70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+    40%, 60% {
+        transform: translate3d(4px, 0, 0);
+    }
+}
+footer{
+    width: 500px;
+    margin: 50px auto 0;
+}
+footer h3{
+    margin-bottom: 10px;
+}
+footer .tips-content li{
+    padding: 3px 0;
+}
+/* main{
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -50,12 +215,8 @@ main{
     border: 1px solid #373737;
     color: #c5c5c5;
     border-radius: 6px;
-    /* box-shadow */
     box-shadow: 0 0 0 1px #1a1b1c,0 0 0 2px #1f2020,0 3px 0 2px #080808;
     position: relative;
-    /* display: inline-flex;
-    align-items: center;
-    justify-content: center; */
 }
 .key .text{
     position: absolute;
@@ -74,4 +235,4 @@ main{
 }
 .row kbd{
     margin: 0 10px;
-}
+} */

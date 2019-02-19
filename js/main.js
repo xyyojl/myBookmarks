@@ -26,39 +26,49 @@ listenToUser(hash);
 // 下面是工具函数
 function init(){
     var keys = {
-        '0' : {0:'q',1:'w',2:'e',3:'r',4:'t',5:'y',6:'u',7:'i',8:'o',9:'p',length:10},
-        '1' : {0:'a',1:'s',2:'d',3:'f',4:'g',5:'h',6:'j',7:'k',8:'l',length:9},
-        '2' : {0:'z',1:'x',2:'c',3:'v',4:'b',5:'n',6:'m',length:7},
-        'length' : 3
+        0 : ['q','w','e','r','t','y','u','i','o','p'],
+        1 : ['a','s','d','f','g','h','j','k','l'],
+        2 : ['z','x','c','v','b','n','m'],
+        length : 3
     }
     var hash = {
         q : 'qq.com',
-        w : 'weibo.com',
-        e : 'ele.me',
-        t : 'tianya.cn',
+        w : 'wangdoc.com',
+        e : undefined,
+        r : 'react-juejin.foreversnsd.cn',
+        t : 'tgideas.qq.com/doc/',
         y : 'youtube.com',
-        u : 'uc.cn',
-        i : 'iqiyi.com',
-        o : 'opera.com',
-        p : 'python.org',
-        a : 'acfun.cn',
-        s :  undefined,
-        d : 'dilidili.wang',
+        i : 'iciba.com',
+        o : undefined,
+        p : undefined,
+        a : undefined,
+        s : 'segmentfault.com',
+        d : 'dribbble.com',
+        f : undefined,
+        g : 'github.com',
+        h : undefined,
+        j : 'jianshu.com',
+        k : 'ke.qq.com',
+        l : undefined,
         z : 'zhihu.com',
-        x : 'xiaohuochai.cc',
+        x : 'xiedaimala.com',
         c : 'csdn.net',
-        m : 'meizu.com'
+        v : undefined,
+        b : 'bilibili.com',
+        n : undefined,
+        m : 'main.163.com'
     }
-    //取出localStorage中的zzz对应的hash
-    var hashInLocalStorage = getFormLocalStorage('zzz');
-    if(hashInLocalStorage){
-        hash = hashInLocalStorage;
+	//取出localStorage里面的zzz对应的hash 
+    var hasInLocalStorage = getFromLocalStorage('zzz');
+    if(hasInLocalStorage){
+        hash = hasInLocalStorage;
     }
     return {
-        'keys':keys,
-        'hash':hash
+        'keys' : keys,
+        'hash' : hash
     }
 }
+
 function generateKeyBoard(keys,hash){
     for(var index = 0;index < keys['length'];index = index + 1){//0 1 2
         var div = tag('div');
@@ -76,12 +86,15 @@ function generateKeyBoard(keys,hash){
             var button = createButton(row[index2]);
 
             var kbd = tag('kbd');
+            var kbd_wrapper = tag('div');
             kbd.className = 'key';
-
+            kbd.title = hash[row[index2]];
+            kbd_wrapper.className = 'kbd_wrapper';
             kbd.appendChild(span);
             kbd.appendChild(img);
             kbd.appendChild(button);
-            div.appendChild(kbd);
+            kbd_wrapper.appendChild(kbd);
+            div.appendChild(kbd_wrapper);
         }
     }
 }
@@ -92,8 +105,8 @@ function listenToUser(hash){
         window.open('http://'+website,'_blank');
     }
 }
-function getFormLocalStorage(name){
-    return JSON.parse(localStorage.getItem(name) || null)
+function getFromLocalStorage(name){
+    return JSON.parse(localStorage.getItem(name) || 'null');
 }
 function tag(tagName){
     var element = document.createElement(tagName);
@@ -114,7 +127,7 @@ function createSpan(textContent){
 }
 function createButton(id){
     var button = tag('button');
-        button.textContent = '编辑';
+        button.textContent = 'e';
         button.id = id;
         button.onclick = function(xyz){
             var button2 = xyz['target'];
@@ -126,7 +139,7 @@ function createButton(id){
             //将原来的hash给替换掉
             hash[key] = web;
             img2.src = 'http://' + web + '/favicon.ico';
-            xyz.target.src = '//i.loli.net/2017/11/10/5a05afbc5e183.png';
+            xyz.target.src = './image/dot.png';
             localStorage.setItem('zzz',JSON.stringify(hash));
         }
     return button;
@@ -136,10 +149,10 @@ function createImage(domain){//hash[row[index2]]
     if(domain){
         img.src = 'http://' + domain + '/favicon.ico';
     }else{
-        img.src = '//i.loli.net/2017/11/10/5a05afbc5e183.png';
+        img.src = './image/dot.png';
     }
     img.onerror = function(xyz){
-        xyz.target.src = '//i.loli.net/2017/11/10/5a05afbc5e183.png';
+        xyz.target.src = './image/dot.png';
     }
     return img;
 }

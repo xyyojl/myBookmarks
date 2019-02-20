@@ -95,7 +95,12 @@ function generateKeyBoard(keys,hash){
                 kbd.setAttribute('title',hash[row[index2]]);
             }
             kbd.onclick = function(e){
-                
+                var website = e.currentTarget.getAttribute('title');
+                if (website === '未设置网站导航') {
+                    alert('请编辑此按键的网站再跳转')
+                } else {
+                    window.open('http://' + website, "_blank");
+                }
             }
             // kbd.title = hash[row[index2]];
             kbd_wrapper.className = 'kbd_wrapper';
@@ -111,7 +116,6 @@ function generateKeyBoard(keys,hash){
 function listenToUser(hash){
     var ifInputting = false;
     var inputBar = document.getElementById('input-bar');
-    console.log(inputBar);
     var searchBtn = document.querySelector('.search-btn');
     inputBar.addEventListener('focus',function(e){
         ifInputting = true;
@@ -124,7 +128,6 @@ function listenToUser(hash){
     searchBtn.onclick = function(e){
         e.preventDefault();
         var searchContent = inputBar.value;
-        console.log(searchContent)
         // 判断是什么搜索引擎
         var searchEnginLogo = document.getElementById('search-engin-logo');
         var engin = searchEnginLogo.getAttribute('data-engin');
@@ -142,12 +145,22 @@ function listenToUser(hash){
         var key = xyz['key'];
         var website = hash[key];
         // && website !== undefined
-        if(!ifInputting  && website !== undefined){
-            setTimeout(function(){
-                window.open('http://'+website,'_blank')	//新窗口打开网页	
-            },500)
-        }else if(!ifInputting  && website === undefined){
-            alert('请编辑此按键的网站再跳转');
+        if(!ifInputting){
+/*             if(website !== undefined){
+                setTimeout(function(){
+                    window.open('http://'+website,'_blank')	//新窗口打开网页	
+                },500)
+            }else if(website === undefined){
+                alert('请编辑此按键的网站再跳转');
+            } */
+            if (website === undefined) {
+                alert('请编辑此按键的网站再跳转')
+            } else {
+                // window.open('http://' + website, "_blank");
+                setTimeout(function(){
+                    window.open('http://'+website,'_blank')	//新窗口打开网页	
+                },500)
+            }
         }
     }
 }
@@ -158,13 +171,13 @@ function tag(tagName){
     var element = document.createElement(tagName);
     return element;
 }
-function tag1(tagName,attributes){
+/* function tag1(tagName,attributes){
     var element = document.createElement(tagName);
     for(var key in attributes){
         element[key] = attributes[key];
     }
     return element;
-}
+} */
 function createSpan(textContent){
     var span = tag('span');
     span.textContent = textContent;//第一个数组 第二个数组 第三个数组
@@ -175,8 +188,10 @@ function createButton(id){
     var button = tag('button');
         button.textContent = 'e';
         button.id = id;
-        button.onclick = function(xyz){
-            var button2 = xyz['target'];
+        button.onclick = function(e){
+            //阻止事件冒泡
+            e.stopPropagation();
+            var button2 = e['target'];
             var img2 = button2.previousSibling;
             //获取当前的id
             var key = button2['id'];
@@ -185,9 +200,10 @@ function createButton(id){
             //将原来的hash给替换掉
             hash[key] = web;
             img2.src = 'http://' + web + '/favicon.ico';
-            xyz.target.src = './image/dot.png';
+            e.target.src = './image/dot.png';
             localStorage.setItem('zzz',JSON.stringify(hash));
         }
+    
     return button;
 }
 function createImage(domain){//hash[row[index2]]

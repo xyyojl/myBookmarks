@@ -21,7 +21,7 @@ generateKeyBoard(keys,hash);
 //key的兼容性不是很好
 listenToUser(hash);
 
-
+switchSearchEngin();
 
 // 下面是工具函数
 function init(){
@@ -56,7 +56,7 @@ function init(){
         v : undefined,
         b : 'bilibili.com',
         n : undefined,
-        m : 'main.163.com'
+        m : 'mail.163.com'
     }
 	//取出localStorage里面的zzz对应的hash 
     var hasInLocalStorage = getFromLocalStorage('zzz');
@@ -88,8 +88,18 @@ function generateKeyBoard(keys,hash){
             var kbd = tag('kbd');
             var kbd_wrapper = tag('div');
             kbd.className = 'key';
-            kbd.title = hash[row[index2]];
+
+            if(hash[row[index2]] === undefined){
+                kbd.setAttribute('title','未设置网站导航');
+            }else{
+                kbd.setAttribute('title',hash[row[index2]]);
+            }
+            kbd.onclick = function(e){
+                
+            }
+            // kbd.title = hash[row[index2]];
             kbd_wrapper.className = 'kbd_wrapper';
+
             kbd.appendChild(span);
             kbd.appendChild(img);
             kbd.appendChild(button);
@@ -99,10 +109,46 @@ function generateKeyBoard(keys,hash){
     }
 }
 function listenToUser(hash){
+    var ifInputting = false;
+    var inputBar = document.getElementById('input-bar');
+    console.log(inputBar);
+    var searchBtn = document.querySelector('.search-btn');
+    inputBar.addEventListener('focus',function(e){
+        ifInputting = true;
+        e.target.placeholder = '';    
+    })
+    inputBar.addEventListener('focusout',function(e){
+        ifInputting = false;
+        e.target.placeholder = '点击左边图标切换搜索引擎';
+    })
+    searchBtn.onclick = function(e){
+        e.preventDefault();
+        var searchContent = inputBar.value;
+        console.log(searchContent)
+        // 判断是什么搜索引擎
+        var searchEnginLogo = document.getElementById('search-engin-logo');
+        var engin = searchEnginLogo.getAttribute('data-engin');
+        switch (engin) {
+            case 'baidu':
+                window.open("https://www.baidu.com/s?wd="+searchContent,'_blank');
+                break;
+            case 'google':
+                window.open("https://www.google.com/search?q="+searchContent,'_blank');
+                break;
+        }
+    }
+
     document.onkeypress = function(xyz){
         var key = xyz['key'];
         var website = hash[key];
-        window.open('http://'+website,'_blank');
+        // && website !== undefined
+        if(!ifInputting  && website !== undefined){
+            setTimeout(function(){
+                window.open('http://'+website,'_blank')	//新窗口打开网页	
+            },500)
+        }else if(!ifInputting  && website === undefined){
+            alert('请编辑此按键的网站再跳转');
+        }
     }
 }
 function getFromLocalStorage(name){
@@ -155,4 +201,34 @@ function createImage(domain){//hash[row[index2]]
         xyz.target.src = './image/dot.png';
     }
     return img;
+}
+
+// 切换搜索引擎
+function switchSearchEngin() {
+    var ifSwitch = false;
+    // false代表要切换成引擎google，true代表要切换成引擎baidu
+    var searchEnginLogo = document.getElementById('search-engin-logo');
+    var baiduLogo = document.querySelector('#search-engin-logo li:nth-child(1)');
+    var googleLogo = document.querySelector('#search-engin-logo li:nth-child(2)');
+    var baiduPic = document.querySelector('#search-engin-pic li:nth-child(1)');
+    var googlePic = document.querySelector('#search-engin-pic li:nth-child(2)');
+    searchEnginLogo.setAttribute('data-engin','baidu');
+    searchEnginLogo.onclick = function(){
+        if (!ifSwitch) {
+            // baidu --> google
+            baiduLogo.classList.remove('active');
+            googleLogo.classList.add('active');
+            baiduPic.classList.remove('active');
+            googlePic.classList.add('active');
+            searchEnginLogo.setAttribute('data-engin','google');
+        }else{
+            // google --> baidu
+            googleLogo.classList.remove('active');
+            baiduLogo.classList.add('active');
+            googlePic.classList.remove('active');
+            baiduPic.classList.add('active');
+            searchEnginLogo.setAttribute('data-engin','baidu');
+        }
+        ifSwitch = !ifSwitch;
+    }
 }

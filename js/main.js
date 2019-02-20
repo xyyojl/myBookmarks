@@ -20,7 +20,6 @@ generateKeyBoard(keys,hash);
 //要监听谁的键盘事件 main还是document，需要知道用户按的是什么键
 //key的兼容性不是很好
 listenToUser(hash);
-
 switchSearchEngin();
 
 // 下面是工具函数
@@ -77,7 +76,6 @@ function generateKeyBoard(keys,hash){
         main.appendChild(div);
 
         var row = keys[index];
-        // console.log(keys[index]['length']);
         for(var index2 = 0;index2 < row['length'];index2=index2+1){//将固定的10换成可控制的
             var span = createSpan(row[index2]);
 
@@ -94,6 +92,7 @@ function generateKeyBoard(keys,hash){
             }else{
                 kbd.setAttribute('title',hash[row[index2]]);
             }
+
             kbd.onclick = function(e){
                 var website = e.currentTarget.getAttribute('title');
                 if (website === '未设置网站导航') {
@@ -102,7 +101,6 @@ function generateKeyBoard(keys,hash){
                     window.open('http://' + website, "_blank");
                 }
             }
-            // kbd.title = hash[row[index2]];
             kbd_wrapper.className = 'kbd_wrapper';
 
             kbd.appendChild(span);
@@ -115,8 +113,8 @@ function generateKeyBoard(keys,hash){
 }
 function listenToUser(hash){
     var ifInputting = false;
-    var inputBar = document.getElementById('input-bar');
-    var searchBtn = document.querySelector('.search-btn');
+    var inputBar = document.getElementById('inputBar');
+    var searchBtn = document.querySelector('.searchBtn');
     inputBar.addEventListener('focus',function(e){
         ifInputting = true;
         e.target.placeholder = '';    
@@ -129,7 +127,7 @@ function listenToUser(hash){
         e.preventDefault();
         var searchContent = inputBar.value;
         // 判断是什么搜索引擎
-        var searchEnginLogo = document.getElementById('search-engin-logo');
+        var searchEnginLogo = document.getElementById('searchEnginLogo');
         var engin = searchEnginLogo.getAttribute('data-engin');
         switch (engin) {
             case 'baidu':
@@ -146,13 +144,6 @@ function listenToUser(hash){
         var website = hash[key];
         // && website !== undefined
         if(!ifInputting){
-/*             if(website !== undefined){
-                setTimeout(function(){
-                    window.open('http://'+website,'_blank')	//新窗口打开网页	
-                },500)
-            }else if(website === undefined){
-                alert('请编辑此按键的网站再跳转');
-            } */
             if (website === undefined) {
                 alert('请编辑此按键的网站再跳转')
             } else {
@@ -171,13 +162,6 @@ function tag(tagName){
     var element = document.createElement(tagName);
     return element;
 }
-/* function tag1(tagName,attributes){
-    var element = document.createElement(tagName);
-    for(var key in attributes){
-        element[key] = attributes[key];
-    }
-    return element;
-} */
 function createSpan(textContent){
     var span = tag('span');
     span.textContent = textContent;//第一个数组 第二个数组 第三个数组
@@ -223,11 +207,11 @@ function createImage(domain){//hash[row[index2]]
 function switchSearchEngin() {
     var ifSwitch = false;
     // false代表要切换成引擎google，true代表要切换成引擎baidu
-    var searchEnginLogo = document.getElementById('search-engin-logo');
-    var baiduLogo = document.querySelector('#search-engin-logo li:nth-child(1)');
-    var googleLogo = document.querySelector('#search-engin-logo li:nth-child(2)');
-    var baiduPic = document.querySelector('#search-engin-pic li:nth-child(1)');
-    var googlePic = document.querySelector('#search-engin-pic li:nth-child(2)');
+    var searchEnginLogo = document.getElementById('searchEnginLogo');
+    var baiduLogo = document.querySelector('#searchEnginLogo li:nth-child(1)');
+    var googleLogo = document.querySelector('#searchEnginLogo li:nth-child(2)');
+    var baiduPic = document.querySelector('#searchEnginPic li:nth-child(1)');
+    var googlePic = document.querySelector('#searchEnginPic li:nth-child(2)');
     searchEnginLogo.setAttribute('data-engin','baidu');
     searchEnginLogo.onclick = function(){
         if (!ifSwitch) {

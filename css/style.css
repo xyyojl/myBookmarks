@@ -16,26 +16,26 @@ header{
     height: 44px;
     margin: 100px auto 50px;
 }
-header .search-engin-pic{
+header .searchEnginPic{
     float: left;
     width: 120px;
     height: 44px;
 }
-header .search-engin-pic li{
+header .searchEnginPic li{
     display: none;
 }
-header .search-engin-pic li.active{
+header .searchEnginPic li.active{
     display: inline-block;
 }
-header .search-engin-pic li:nth-child(2) img{
+header .searchEnginPic li:nth-child(2) img{
     width: 120px;
     height: 44px;
 }
-header .search-engin-pic li:nth-child(1) img{
+header .searchEnginPic li:nth-child(1) img{
     width: 120px;
     padding: 2.5px 0;
 }
-header .search-bar{
+header .searchBar{
     float: right;
     width: 580px;
     height: 44px;
@@ -43,28 +43,28 @@ header .search-bar{
     position: relative;
     background: #fff;
 }
-header .search-bar:hover{
+header .searchBar:hover{
     box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
     border-color: rgba(223,225,229,0);
 }
-header .search-bar .search-engin-logo{
+header .searchBar .searchEnginLogo{
     position: absolute;
     left: 10px;
     width: 24px;
     height: 44px;
 }
-header .search-bar .search-engin-logo li{
+header .searchBar .searchEnginLogo li{
     display: none;
 }
-header .search-bar .search-engin-logo li.active{
+header .searchBar .searchEnginLogo li.active{
     display: inline-block;
 }
-.search-bar .search-engin-logo li img{
+.searchBar .searchEnginLogo li img{
     width: 24px;
     height: 24px;
     padding: 10px 0;
 }
-.search-bar input{
+.searchBar input{
     position: absolute;
     left: 46px;
     top: 10%;
@@ -73,7 +73,7 @@ header .search-bar .search-engin-logo li.active{
     border: none;
     outline: none;
 }
-.search-bar .search-btn{
+.searchBar .searchBtn{
     position: absolute;
     right: 6px;
     top: 7px;

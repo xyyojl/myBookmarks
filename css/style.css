@@ -5,12 +5,14 @@ ul{list-style: none;}
     display: block;
     clear: both;
 }
+
+/* 注意：这里图片路径是相对路径 */
 body{
-    /* viewport height */
-    /* height: 100vh; */
     background: #ccc url(../image/bg.jpg) no-repeat center center;
     background-size: cover;
 }
+
+/* header */
 header{
     width: 720px;
     height: 44px;
@@ -27,14 +29,15 @@ header .searchEnginPic li{
 header .searchEnginPic li.active{
     display: inline-block;
 }
-header .searchEnginPic li:nth-child(2) img{
-    width: 120px;
-    height: 44px;
-}
 header .searchEnginPic li:nth-child(1) img{
-    width: 120px;
+    width: 120px; 
     padding: 2.5px 0;
 }
+header .searchEnginPic li:nth-child(2) img{
+    width: 120px; 
+    height: 44px;
+}
+
 header .searchBar{
     float: right;
     width: 580px;
@@ -52,6 +55,7 @@ header .searchBar .searchEnginLogo{
     left: 10px;
     width: 24px;
     height: 44px;
+    cursor: pointer;
 }
 header .searchBar .searchEnginLogo li{
     display: none;
@@ -84,6 +88,8 @@ header .searchBar .searchEnginLogo li.active{
     border: none;
     outline: none;
 }
+
+/* main */
 .wrapper div{
     width: 850px;
     margin: 0 auto;
@@ -123,20 +129,25 @@ header .searchBar .searchEnginLogo li.active{
     perspective: 1000px;
 }
 .wrapper kbd > button{
+    display: none;
     position: absolute;
     right: 2px;
     bottom: 2px;
     font-size: 12px;
-    display: none;
     width: 16px;
     height: 16px;
     border-radius: 5px;
     border: none;
     outline: none;
     color: #333;
+    cursor: pointer;
 }
 .wrapper kbd:hover > button{
     display: inline-block;
+}
+.wrapper kbd > button:hover{
+    background: #806605;
+    color: #fff;
 }
 .key img{
     width: 16px;
@@ -159,8 +170,10 @@ header .searchBar .searchEnginLogo li.active{
         transform: translate3d(4px, 0, 0);
     }
 }
+
+/* footer */
 footer{
-    width: 500px;
+    width: 390px;
     margin: 50px auto 0;
 }
 footer h3{
